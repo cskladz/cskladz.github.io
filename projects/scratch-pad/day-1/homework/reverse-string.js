@@ -20,32 +20,35 @@
  */
 
 function reverseString(input) {
+    console.log(typeof input);
     // YOUR CODE GOES BELOW HERE //
-    //We want to convert input to a string//
-    console.log(input.toString());
-    var inputStr = input.toString();
+        //We want to only accept string input//
+  if( typeof input === 'string'){
     //make each character/element in the string seperate indexes in an array//
-    var inputArr = inputStr.split("");
-    console.log(inputArr);
-    console.log(inputArr.length-1);
+    var inputArr = input.split("");
     //set index[0] of new 'array-ed' string  equal to the last index // input.length-1 //
-    console.log(inputArr[2]);
     var outputArr=[];
-    outputArr[0]=inputArr[inputArr.length-1];
-    console.log(inputArr[inputArr.length-1]);
-    console.log(outputArr);
-    //var outputStr
-    //return outputStr;
-    //set outputArr[x] = inputArr[y]
+        //set outputArr[x] = inputArr[y]
       //we want x to start at 0 and count up (x++) until it reaches inputArr.length
-      //we want y to start at .length (ie.5) and count down (y--) until it reaches zero
-    return;
+      //we want y to start at .length -y (ie.5) and count up (y++)
+    var i=0;
+    var x=1;
+    do {
+      outputArr[i]=inputArr[inputArr.length-x];
+      i++;
+      x++;
+    }
+    while(i<=inputArr.length);
+    //convert out new array back into a string a return it
+    var outputStr =outputArr.join("");
+    //return outputStr;
+    console.log(outputStr);
+    return outputStr;
+    }
+    else return "this is not a string";
     // YOUR CODE GOES ABOVE HERE //
 }
 
-    //TESTING //
-    console.log(reverseString("hello"));
-    
 
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////

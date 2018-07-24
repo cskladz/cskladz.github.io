@@ -23,15 +23,26 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
-    
-    
-    
+   var outputArr =[];
+   if(typeof start === 'number' && typeof end === 'number' && start<end){
+    for(var i= start; i<= end; i++){
+        outputArr.push(i);
+    }
+   }
+    else if(typeof start === 'number' && typeof end === 'number' && start>end){
+        for(var i= start; i>= end; i--){
+        outputArr.push(i);
+        }
+    }
+    console.log(outputArr);
+    return outputArr;
+   
     
     // YOUR CODE GOES ABOVE HERE //
 }
 
 
-
+range(5,8);
 
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////

@@ -35,6 +35,34 @@
 
 function greeter(hour) {
     // YOUR CODE BELOW HERE //
+    //Need to print strings out according to a series of conditions
+    var mor = "Good Morning!";
+    var aft = "Good Afternoon!";
+    var eve ="Good Evening!";
+    var nig = "Good Night!";
+    //Set if statements to check hour
+    //console.log(Boolean(hour <= 13));
+        //if hour is <= 11
+    if(hour <= 11){
+            //print morning greeting
+        console.log("Good Morning!");
+        return "Good Morning!";
+    }
+        //else if hour <= 16
+    else if(hour <= 16){    
+            //print afternoon greeting
+        console.log(aft);
+    }
+        //else if hour <= 21
+    else if(hour <= 21){    
+            //print evening greeting
+        console.log(eve);
+    }    
+        //else
+    else{   
+            //print night greeting
+        console.log(nig);
+    }
     
     
     
@@ -52,8 +80,6 @@ function greeter(hour) {
  * var today = new Date();
  * var hour = today.getHours();
  */
-
-greeter(11);
 
 
 

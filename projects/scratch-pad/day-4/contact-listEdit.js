@@ -1,4 +1,4 @@
-// #!/usr/bin/env node
+
 
 'use strict';
 
@@ -47,7 +47,10 @@ function makeContact(id, nameFirst, nameLast) {
 
 
 function makeContactList() {
-
+    /*
+     * You need something here to hold contacts. See length api for a hint:
+     */
+    //var nameFull =[]; 
     var contactList; 
     var contacts = [];
     
@@ -85,9 +88,20 @@ function makeContactList() {
                 nameFull.push(contacts[nameObj].nameFirst + " " + contacts[nameObj].nameLast);
             }
             contactList = nameFull.join('\n');
-            return contactList;
+            return contactListd;
         }
     };
+                //printAllContactNames: function(){
+            //need to join contact.nameFirst with contact.nameLast
+        //}
+    
+        
+        /*    for(var nameObj in contacts){
+                nameFull.push(contacts[nameObj].nameFirst + " " + contacts[nameObj].nameLast); 
+                //console.log(nameFull);
+            }
+            contactList = nameFull.join('\n');
+        */
 }
 
 

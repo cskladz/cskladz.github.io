@@ -155,7 +155,13 @@ function isFriend(name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-    console.log("1", "name", name, "array", array);
+    var result =[];
+    for(var i =0; i< array.length; i++){
+        if(!(array[i].friends.includes(name))  && array[i].name !== name){ result.push(array[i].name) }        
+    }
+    return result;    
+}
+
     
     //check friends poroperty of given object for name match
         // return array of names not matched
@@ -198,7 +204,7 @@ console.log("array and name ",array, name);
     return result;
     */
 
-}
+//}
 
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
@@ -234,7 +240,16 @@ function dedup(array) {
    
 //we want to take an array, and return the array with duplicates removed....
     //so lets search google for an "array method to remove duplicates in javascript"
-
+        //one method is to sort the array....and then remove elements that match preceeding element
+            //
+    var sortedArray = array.sort();
+    var uniqueName = [];
+    for (var i = 0; i<array.length; i++){
+        if(sortedArray[i] !== sortedArray[i-1]) uniqueName.push(sortedArray[i]);
+    }
+    return uniqueName;
+    //do something with matched indexes??
+}
    
     // var arrCompare = array;
     // for(var i =0; i< array.length;){
@@ -251,7 +266,7 @@ function dedup(array) {
     // }
     // return arrCompare;
 
-}
+//}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

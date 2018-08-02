@@ -53,6 +53,7 @@ function remove(animals, name){
 //////////////////////////////////////////////////////////////////////
 function add(animals, animal){
     for(var i=0; i<animals.length; i++){
+        console.log(animals,animal);
         if (animals[i].name === animal.name) return;
 
         else if(animal.name != 0 && animal.species != 0){

@@ -157,7 +157,7 @@ function isFriend(name, object) {
 function nonFriends(name, array) {
     var result =[];
     for(var i =0; i< array.length; i++){
-        if(!(array[i].friends.includes(name))  && array[i].name !== name){ result.push(array[i].name) }        
+        if(!(array[i].friends.includes(name))  && array[i].name !== name) result.push(array[i].name);        
     }
     return result;    
 }
@@ -240,7 +240,7 @@ function dedup(array) {
    
 //we want to take an array, and return the array with duplicates removed....
     //so lets search google for an "array method to remove duplicates in javascript"
-        //one method is to sort the array....and then remove elements that match preceeding element
+        //one method is to sort the array....and then push elements that dont match its preceeding element into a returned array
             //
     var sortedArray = array.sort();
     var uniqueName = [];

@@ -168,9 +168,9 @@ _.each = (collection, action) => {
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 _.indexOf = (array, value) => {
-    for(var i =0; i< array.length; i++){
+   for (var i = 0; i < array.length; i++){
         if(array[i] === value) return i;
-    }
+   }
     return -1;
 };
 
@@ -195,15 +195,21 @@ _.indexOf = (array, value) => {
 _.filter = (array, action) => {
     var result = [];
     //console.log("array", array, "action", action);
-    _.each(array,((element, index, collection) => { if(action(element, index, collection)) result.push(element) }));
+    _.each(array, 
+        function(element, index, collection){ 
+            if(action(element, index, collection)){ 
+                result.push(element); 
+            }    
+        });
     //console.log("result", result);
+    //_.each(array,((element, index, collection) => { if(action(element, index, collection)) result.push(element) }));
     return result;
 };
 //how does filter make use of .each??
-    //when .filter is called...<array =["a", 1, "b", 2, "c", 4]>  
-    // action is  ƒ (e,i,a){
+    //when .filter is called...<array = ["a", 1, "b", 2, "c", 4]>  
+    // <action is =  ƒ (e,i,a){
     //     return typeof e === "string" && i < a.length/2;
-    // }
+    // }>
         //this is written in the test file....".filter is called with the above array and function passed into it..."
         //we want to pass this "action" into the "action" of .each...
             //basically running this given function agasint all values in a collection...
@@ -306,6 +312,30 @@ _.partition = (array, action) => {
             //need to make an action to pass into .each that acts as a function which will return the value of th element in given array
     //splice out returned indexes from indexOf;
 _.unique = (array) => {
+    var result = [];
+    for(var i =0; i<array.length; i++){
+    let index =(_.indexOf(array, array[i]));
+    //if the current value is not included in the result array then push it
+    if(!(result.includes(array[i]))) result.push(array[_.indexOf(array, array[i])]);
+    }
+    return result;
+    //using .indexOf, we'll get a return of an index
+    
+    
+    //we want to take an array, and return the array with duplicates removed....
+     //one method is to sort the array....and then push elements that dont match its preceeding element into a returned array
+/*  var uniqueName = [];
+_.each(array, (element, index, array) => {
+    console.log("uniqueName before if", uniqueName);
+    let sortedArray = array.sort();
+    if(sortedArray[index] !== sortedArray[index-1]) uniqueName.push(element);
+    });
+  return uniqueName;
+*/
+
+//lets push the return of the first occurence of each matched value into a new array.
+
+    
 //     console.log("array", array);
 //     var result = [];
 //   _.each(array, (_.indexOf(array, ((element, index, array) => { 
@@ -331,7 +361,16 @@ _.unique = (array) => {
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+_.map = (collection, action) => {
+    var result =[];
+    _.each(collection, (element, index, collection) => {
+        result.push((action(element, index, collection)));     
+    });        
+        
+    
+        
+        return result;
+}; 
 
 /** _.pluck()
 * Arguments:
@@ -343,7 +382,14 @@ _.unique = (array) => {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+_.pluck = (array, property) =>{
+  var result = [];
+  _.map(array, (element, index, collection) =>{
+      result.push(element[property]);
+  } );
+  return result;
+    
+};
 
 /** _.contains()
 * Arguments:
@@ -359,7 +405,13 @@ _.unique = (array) => {
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+_.contains = (array, value) =>{
 
+    return array.includes(value); //=== true ? true : false;
+//   if(array.includes(value)) return true;
+//   else if(!(array.includes(value))) return false;
+    
+};
 
 /** _.every()
 * Arguments:
@@ -381,7 +433,68 @@ _.unique = (array) => {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+_.every = (collection, action) => {
+  var result;
+  if(typeof action != "function" ){
+      _.each(collection, function(element, index, collection){
+            if((!!(element))) result =true;
+            else result = false;
+            console.log(result);
+            return result;
+        });
+  }
+  else {  
+      var reject = _.reject(collection,action);
+    reject.length === 0 ? result = true : result = false;
+  }
+    //else if(_.filter(collection, action)) return true;
+    //call function for every element (.each should meet both requests for iterating over an object and/or an array with said parameters)
+    //console.log(_.reject(collection, action));
+    //pass function over every element in an array or object
+    
+    //if(action(e) === true) for every iteration return true
+        //if(!action(e)) for any iteration return false. 
+        
+    //if function is not provided, run !! agaiasnt every value and return true if all true else false. 
+//   if(action === undefined){
+//       _.each(collection, function(element, index, collection){
+//             if((!!(element))) result =true;
+//             else result = false;
+//             console.log(result);
+//             return result;
+//         });
+//   }
+//   else{
+//         _.each(collection, function(element, index, collection){
+//             if(action(element)) result = true;
+//             else result = false;
+//             console.log(result);
+//             return result;
+//             //result.push(action(element));
+            
+//         });
+//   }
+return result;
+};
 
+//run the collections through .filter and .reject and infer presence of a falsey statemtns by comparing the lengths of the returning arrays....check if returning array includes any false statements.....
+//  for example, if i send the same array and function to .filter and .reject, .filter will only fill up true values, if that returning length is less than the length of array sent to it, we can infer not all statements were true.
+//  or, similary we can send it through .reject. if it returns an empty array then return true, else, false.
+
+//     var result1;
+//     var result2;
+//     console.log(Boolean(collection.length === _.filter(collection, action).length));
+//     //console.log((_.filter(collection, function(e){return Boolean(collection[e])})));
+//     if(action === undefined && collection.length === _.filter(collection, function(e,i,a){return Boolean(e)} ).length) result1 = true;
+        
+//     // && (_.filter(collection, function(e){return Boolean(collection[e])}) === true)) return true;
+//     if(action === undefined && collection.length === _.reject(collection, action).length) result1 = false;
+//     _.each(collection, (element, index, collection) =>{
+//     if(action(element, index, collection)) result2 = true;
+//     else result2 = false;
+//     });
+//   return result1; 
+// };
 
 /** _.some()
 * Arguments:
@@ -403,7 +516,24 @@ _.unique = (array) => {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = (collection, action) =>{
+    var result;
+     if(typeof action != "function" ){
+      _.each(collection, function(element, index, collection){
+            if((!!(element))) result =true;
+            else result = false;
+            //console.log(result);
+            return result;
+        });
+  }
+  else{
+    var filter = _.filter(collection, action);
+    filter.length === 0 ? result = false : result = true;
+    return result;
+  }
+    
+ return result;   
+};
 
 /** _.reduce()
 * Arguments:
@@ -423,7 +553,23 @@ _.unique = (array) => {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+_.reduce = (array, action, seed) =>{
+var result =[];
+//pass the action onto every element in the collecion
 
+//pass the result from the action back into the function
+
+_.each(array, function(e,i,array,current){
+        console.log(result);
+        result.push(current);
+        return current =action(e);
+        result.push(current);
+        }) ;
+        console.log(result);
+        
+
+ return result;   
+};
 
 /** _.extend()
 * Arguments:

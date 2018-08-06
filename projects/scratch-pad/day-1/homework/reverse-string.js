@@ -30,7 +30,7 @@ function reverseString(input) {
     var outputArr=[];
         //set outputArr[x] = inputArr[y]
       //we want x to start at 0 and count up (x++) until it reaches inputArr.length
-      //we want y to start at .length -y (ie.5) and count up (y++)
+      //we want y to start at -1 so .length -y (ie.5) and we count up (y++) we will be getting further from the last index (5, 4, 3) this allows for a dynamic approach
     var i=0;
     var x=1;
     do {

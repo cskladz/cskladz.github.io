@@ -65,7 +65,7 @@ QUnit.test("_.each()", function(assert){
 
 QUnit.test("_.indexOf()", function(assert){
     var inputData = ["a","b","c","d"];
-    assert.deepEqual(_.indexOf(inputData, "b") , 1, "Should return the correct index when an element is found.");
+    assert.deepEqual(_.indexOf(inputData, "c") , 2, "Should return the correct index when an element is found.");
     assert.deepEqual(_.indexOf(inputData.concat("b"), "b") , 1, "Should return the index of the first occurance of a found element.");
     assert.deepEqual(_.indexOf(inputData, "e") , -1, "Should return -1 if the element is not found.");
     assert.deepEqual(inputData, ["a","b","c","d"], "Should not have side effects.");

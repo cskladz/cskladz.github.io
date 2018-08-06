@@ -18,7 +18,7 @@ function createGreaterThanFilter(base) {
         if(base > value) return false;
         else return true;
         //if(base <= value) return false;
-    }
+    };
     
     
     // YOUR CODE ABOVE HERE //
@@ -36,7 +36,7 @@ function createLessThanFilter(base) {
         if(base < value) return false;
         else return true;
         //if(base <= value) return false;
-    }
+    };
     
     
     // YOUR CODE ABOVE HERE //
@@ -54,7 +54,7 @@ function createStartsWithFilter(startsWith) {
         if(string[0].toLowerCase() == startsWith.toLowerCase()) return true;
         else return false;
         
-    }
+    };
     
     
     // YOUR CODE ABOVE HERE //
@@ -71,7 +71,7 @@ function createEndsWithFilter(endsWith) {
         if(string[string.length-1].toLowerCase() == endsWith.toLowerCase()) return true;
         else return false;
         
-    }
+    };
     
     
     

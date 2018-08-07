@@ -554,20 +554,21 @@ _.some = (collection, action) =>{
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 _.reduce = (array, action, seed) =>{
-var result =[];
+var result;
 //pass the action onto every element in the collecion
-
+//var result1 = _.each(array, action); 
 //pass the result from the action back into the function
-
-_.each(array, function(e,i,array,current){
-        console.log(result);
-        result.push(current);
-        return current =action(e);
-        result.push(current);
-        }) ;
-        console.log(result);
+  
+_.each(array, function(e,i,array,previous){
+                while(i<array.length){
+            if(!seed) previous = action(array[0]);
+            console.log(previous);
+            result += previous;
+            return previous = action(e);
+                }
+    });
         
-
+//console.log(result1);
  return result;   
 };
 

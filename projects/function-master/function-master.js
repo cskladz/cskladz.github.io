@@ -250,7 +250,8 @@ function dedup(array) {
     return uniqueName;
     //do something with matched indexes??
 }
-   
+ //push all values not return by indexOf as -1
+    //basically run indexOf, it will return first instance push that do not push anything that indexOf returns a -1 of
     // var arrCompare = array;
     // for(var i =0; i< array.length;){
     //     var firstRunCheck = true;

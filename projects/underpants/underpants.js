@@ -554,22 +554,22 @@ _.some = (collection, action) =>{
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 _.reduce = (array, action, seed) =>{
-var result;
 //pass the action onto every element in the collecion
 //var result1 = _.each(array, action); 
 //pass the result from the action back into the function
   
-_.each(array, function(e,i,array,previous){
-                while(i<array.length){
-            if(!seed) previous = action(array[0]);
-            console.log(previous);
-            result += previous;
-            return previous = action(e);
+_.each(array, function(element,index,array){
+            if(seed === undefined){
+                return seed = element;
+            } 
+            else {
+                return seed = action(seed, element, index);
+        
                 }
     });
         
 //console.log(result1);
- return result;   
+ return seed;   
 };
 
 /** _.extend()
@@ -587,7 +587,12 @@ _.each(array, function(e,i,array,previous){
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
-
+_.extend = (object1, obj2, nextObj) => {
+    for(var key in object1) {
+        Object.assign(object1, obj2, nextObj);
+    }
+    return object1;
+};
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////

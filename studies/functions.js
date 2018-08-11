@@ -29,7 +29,14 @@ Functions take whatever inputs we specify as our parameters, by using the return
  * 
 
  *Closures: Functions form closures around the data they house. If an object returned from the Function and is held in memory somewhere (referenced), that closure stays ALIVE, and data can continue to exist in these closures! (See: our meeting-room app for an example!) (ALSO, see: Understanding JavaScript Closures with Ease)
-
+A Closure is a function that retaubs access to an outer (enclosing) function's variable even after the outer function has returned. Very useful for privitizing varibales:
+by making this inaccessible to other scopes modifications can only occur with specific intent. 
+and example would be:
+function add(x){
+    return function(y){
+        return x + y
+    }
+}
  * 
  * 
  **/

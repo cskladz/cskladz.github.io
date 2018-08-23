@@ -195,14 +195,14 @@ _.indexOf = (array, value) => {
 _.filter = (array, action) => {
     var result = [];
     //console.log("array", array, "action", action);
-    _.each(array, 
-        function(element, index, collection){ 
-            if(action(element, index, collection)){ 
-                result.push(element); 
-            }    
-        });
+    // _.each(array, 
+    //     function(element, index, collection){ 
+    //         if(action(element, index, collection)){ 
+    //             result.push(element); 
+    //         }    
+    //     });
     //console.log("result", result);
-    //_.each(array,((element, index, collection) => { if(action(element, index, collection)) result.push(element) }));
+    _.each(array,((element, index, collection) => { if(action(element, index, collection)) result.push(element) }));
     return result;
 };
 //how does filter make use of .each??
@@ -250,7 +250,7 @@ _.filter{arra
 */
 _.reject = (array, action) => {
     var result = [];
-    _.filter(array, ( (element, index, collection) => { if(!(action(element, index, collection))) result.push(element) } )  );
+    _.each(array, ( (element, index, collection) => { if(!(action(element, index, collection))) result.push(element) } )  );
     return result;
     
 };
@@ -314,7 +314,7 @@ _.partition = (array, action) => {
 _.unique = (array) => {
     var result = [];
     for(var i =0; i<array.length; i++){
-    let index =(_.indexOf(array, array[i]));
+    //let index =(_.indexOf(array, array[i]));
     //if the current value is not included in the result array then push it
     if(!(result.includes(array[i]))) result.push(array[_.indexOf(array, array[i])]);
     }
@@ -405,13 +405,11 @@ _.pluck = (array, property) =>{
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-_.contains = (array, value) =>{
-
-    return array.includes(value); //=== true ? true : false;
+_.contains = (array, value) =>{ return array.includes(value) ? true : false };
 //   if(array.includes(value)) return true;
 //   else if(!(array.includes(value))) return false;
     
-};
+
 
 /** _.every()
 * Arguments:
@@ -439,7 +437,7 @@ _.every = (collection, action) => {
       _.each(collection, function(element, index, collection){
             if((!!(element))) result =true;
             else result = false;
-            console.log(result);
+            //console.log(result);
             return result;
         });
   }
@@ -559,7 +557,7 @@ _.reduce = (array, action, seed) =>{
 //pass the result from the action back into the function
   
 _.each(array, function(element,index,array){
-            if(seed === undefined){
+            if(seed === undefined || typeof seed === "false"){
                 return seed = element;
             } 
             else {

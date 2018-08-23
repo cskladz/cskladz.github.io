@@ -11,9 +11,8 @@
 function LetterCapitalize(str){
     
     var inputArr = str.split("");
-    //console.log(inputArr);
+    inputArr[0] = inputArr[0].toUpperCase();
     for(var i = 0; i < inputArr.length; i++){
-        inputArr[0] = inputArr[0].toUpperCase();
         if(inputArr[i] === " ") inputArr[i+1]=inputArr[i+1].toUpperCase();
     }
     return inputArr.join("");

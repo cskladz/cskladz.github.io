@@ -1,0 +1,192 @@
+<!DOCuser html>
+<html>
+  <head>
+    <title>Twiddler</title>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <script src="underbar.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="grid.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+      
+      table {  
+        padding: 5px 4px;
+        border: 6px solid #948473;
+        background-color: #FFE3C6;
+        width: 100%;
+        text-align: center;
+      }
+      table td{
+        padding: 3px 2px
+      }
+      table tr:nth-child(even) {
+        background: #948473;
+      }
+      table td:nth-child(1) {
+        background: #738394;
+      }
+      button {
+        padding: 2px 2px 2px 2px;
+        margin-bottom: 10px
+      }
+      h1 {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        border: none;
+        font: normal 76px/1 "Impact", Charcoal, sans-serif;
+        color: #f1fd08;
+        text-align: center;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        background-color: cadetblue;
+        border: none;
+        -webkit-border-radius: 15px;
+        border-radius: 15px;
+      }
+      
+      button {
+	      -moz-box-shadow: 0px 1px 0px 0px #fff6af;
+	      -webkit-box-shadow: 0px 1px 0px 0px #fff6af;
+	      box-shadow: 0px 1px 0px 0px #fff6af;
+	      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+	      background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	      background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	      background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	      background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	      background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+	      background-color:#ffec64;
+	      -moz-border-radius:6px;
+	      -webkit-border-radius:6px;
+	      border-radius:6px;
+	      border:1px solid #ffaa22;
+	      display:inline-block;
+	      cursor:pointer;
+	      color:#333333;
+	      font-family:Arial;
+	      font-size:15px;
+	      font-weight:bold;
+	      padding:6px 24px;
+	      text-decoration:none;
+	      text-shadow:0px 1px 0px #ffee66;
+      }
+      button:hover {
+	      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+      	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	      background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	      background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	      background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	      background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+	      background-color:#ffab23;
+      }
+      button:active {
+	      position:relative;
+	      top:1px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      $(document).ready(function(){
+/****************************************************************************
+ *  build out html elements and structure of the website
+ * 
+ * 
+ */ 
+        var $body = $('body');
+        $body.html('');
+
+        var $sectionTitle = $('<section>').attr('id','section-title');
+        $sectionTitle.prependTo($body);
+        
+        var $sectionButton = $('<section>').attr('id','section-button');
+        $sectionButton.appendTo($body);
+
+        var $sectionTweets = $('<section>').attr('id', 'section-tweets');
+        $sectionTweets.appendTo($body);
+
+        var $titleHeading = $('<h1>').attr('id','title-text').text('Twiddler');
+        $titleHeading.css('margin-inline-start','22%').css('margin-inline-end', '22%').appendTo($sectionTitle);        
+
+        var $buttonDisplayTweet = $('<button>').attr('id' ,'tweet-button').attr('type','button').text('Newest Tweets!');
+        $buttonDisplayTweet.css('margin-inline-start','37%').css('margin-inline-end', '33%').prependTo($sectionButton);
+        
+        var $inputLabel = $('<label>').attr('for','name').text('Enter a Tweet:');
+        $inputLabel.appendTo($sectionTitle);
+
+        var $input = $('<input>').attr('type','text').attr('id','name')
+            .attr('name','name');
+        $input.appendTo($sectionTitle);
+
+        var $buttonInputTweet = $('<button>').attr('id','input-tweet-button').attr('type','button').text('Submit');
+        $buttonInputTweet.appendTo($sectionTitle);  
+        
+
+/***************************************************************************
+ * Functionality for building out dynamic site content
+ * 
+ * */  
+        var createTable = homeStreams => {
+          var createRow = stream => {
+            let $row = $('<tr>');
+            let $user = $('<td>').text(stream.user).css('font-weight','bold').css('cursor', 'pointer').css('text-decoration', 'underline');
+            let $message = $('<td>').text(stream.message).css('text-align', 'left');
+            let time = stream.created_at.toString().slice(3).slice(0,25);
+            let timeDiff = (stream.created_at - new Date().getTime()) / 1000;
+            let $time = $('<td>').text("posted " + -timeDiff.toFixed(0) + " seconds ago");
+          
+            ///////  Click Event for clicking on a user name ///////         
+            $user.on('click',(event)=>{              
+              $('.tweet-table').remove();
+              let user = event.currentTarget.innerText;
+              let userTableData = streams.users[user].slice().reverse(); 
+              let $userTweetTable = createTable(userTableData);
+              $userTweetTable.appendTo($sectionTweets);              
+            })            
+            $row.append($user);
+            $row.append($message);
+            $row.append($time);
+            return $row;
+            }
+          let $table = $('<table>').attr('class','tweet-table');
+          let $rows = homeStreams.map(createRow);
+          $table.append($rows);
+          return $table;
+        };
+
+        var printTweets = function() {          
+          $('.tweet-table').remove()
+          let tweets = _.last(streams.home,20).slice().reverse();
+          let $tweetTable = createTable(tweets);
+          $tweetTable.appendTo($sectionTweets);
+        }
+        
+        
+        printTweets();      
+
+        $buttonDisplayTweet.on('click', printTweets);
+        streams.users['You'] = [];
+        $buttonInputTweet.on('click', (event)=>{
+          let tweet = {user: 'You', message: $('input').val(), created_at: new Date() };
+          //prepend a table row to the tbody with user tweet
+          streams.users[tweet.user].push(tweet);
+          streams.home.push(tweet);
+          printTweets();
+        })
+      });
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
